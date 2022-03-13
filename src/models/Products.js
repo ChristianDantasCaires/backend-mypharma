@@ -16,7 +16,7 @@ const ProductSchema = new mongoose.Schema(
             required: true
         },
         estoque: {
-            type: String,
+            type: Boolean,
             required: true
         },
 

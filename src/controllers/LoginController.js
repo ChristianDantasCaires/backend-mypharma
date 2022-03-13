@@ -1,7 +1,7 @@
-class TestController {
-    async test(req, res) {
-        res.send("Login");
+class LoginController {
+    async login(req, res) {
+        res.send("xd");
     }
 }
 
-module.exports = new TestController;
+module.exports = new LoginController();

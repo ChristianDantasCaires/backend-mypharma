@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const routes = require("./routes");
-
-//lCiUAI5CtSqwPlyc
+const routesApi = require("./routes");
 
 class App {
     constructor() {
@@ -18,7 +16,7 @@ class App {
     }
 
     routes() {
-        this.app.use(routes);
+        this.app.use(routesApi);
     }
 
     server() {
