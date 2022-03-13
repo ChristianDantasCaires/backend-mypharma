@@ -1,19 +1,13 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const ProductCategorySchema = new mongoose.Schema(
     {
         id: { unique: true },
-
         name: {
             type: String,
             required: true
         },
-        email: {
-            type: String,
-            required: true,
-            id: { unique: true }
-        },
-        password: {
+        description: {
             type: String,
             required: true
         }
@@ -21,4 +15,4 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("productCategory", ProductCategorySchema);
