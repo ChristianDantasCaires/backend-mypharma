@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const routes = require("./routes");
 
 //lCiUAI5CtSqwPlyc
 
@@ -17,9 +18,7 @@ class App {
     }
 
     routes() {
-        this.app.get("/", (req, res) => {
-            res.send("Ola")
-        })
+        this.app.use(routes);
     }
 
     server() {
