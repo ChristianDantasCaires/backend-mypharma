@@ -3,7 +3,7 @@ const config = require("../config/database");
 
 class Database {
     constructor() {
-        mongoose.connect(
+        this.connection = mongoose.connect(
             config.url,
             {
                 useNewUrlParser: true,

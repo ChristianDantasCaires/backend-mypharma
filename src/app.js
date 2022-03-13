@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require("./database/index");
 const routesApi = require("./routes");
 
 class App {

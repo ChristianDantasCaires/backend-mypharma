@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const ProductCategorySchema = new mongoose.Schema(
     {
-        id: { unique: true },
         name: {
+            id: { unique: true },
             type: String,
             required: true
         },

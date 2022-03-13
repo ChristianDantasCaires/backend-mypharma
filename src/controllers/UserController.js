@@ -7,7 +7,7 @@ class UserController {
             const user = await User.findOne({ email });
 
             if (user) {
-                return res.status(422).json({ message: `User ${user} already exists.` });
+                return res.status(422).json({ message: `User ${email} already exists.` });
             }
 
             const newUser = await User.create({ name, email, password });
@@ -21,19 +21,14 @@ class UserController {
     }
 
     async readAll(req, res) {
-        return res.send("oi")
-    }
+        try {
+            const users = await User.find();
+            return res.json(users);
 
-    async readOne(req, res) {
-        return res.send("oi")
-    }
-
-    async update(req, res) {
-        return res.send("oi")
-    }
-
-    async delete(req, res) {
-        return res.send("oi")
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
     }
 }
 
