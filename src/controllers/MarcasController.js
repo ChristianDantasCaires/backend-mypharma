@@ -3,11 +3,11 @@ const Marcas = require("../models/Marcas");
 class MarcasController {
     async create(req, res) {
         try {
-            const { id, name } = req.body;
-            const marca = await Marcas.findById(id);
+            const { name } = req.body;
+            const marca = await Marcas.findOne({ name });
 
             if (marca) {
-                return res.status(422).json({ error: `Marca already exists.` });
+                return res.status(422).json({ error: `Marca ${marca.name} already exists.` });
             }
 
             await Marcas.create({ name });
