@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { createPasswordHash } = require("../services/auth");
 
 class UserController {
     async create(req, res) {
@@ -10,7 +11,9 @@ class UserController {
                 return res.status(422).json({ message: `User ${email} already exists.` });
             }
 
-            const newUser = await User.create({ name, email, password });
+            const securityPass = await createPasswordHash(password);
+
+            const newUser = await User.create({ name, email, password: securityPass });
 
             return res.status(200).json(newUser);
 
@@ -24,6 +27,63 @@ class UserController {
         try {
             const users = await User.find();
             return res.json(users);
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    async readOne(req, res) {
+        try {
+            const { id } = req.params;
+            const user = await User.findById(id);
+
+            if (!user) {
+                return res.status(404).json({ error: "User does not exists." });
+            }
+
+            return res.json(user);
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    async update(req, res) {
+        try {
+            const { id } = req.params;
+            const { name, email, password } = req.body;
+
+            const user = await User.findById(id);
+
+            if (!user) {
+                return res.status(404).json({ error: "User does not exists." });
+            }
+
+            const encryptedPassword = await createHashPassword(password);
+
+            await user.updateOne({ name, email, password: encryptedPassword });
+            return res.status(200).json();
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    async delete(req, res) {
+        try {
+            const { id } = req.params;
+            const user = await User.findById(id);
+
+            if (!user) {
+                return res.status(404).json({ error: "User does not exists." });
+            }
+
+            await user.deleteOne();
+            return res.status(200).json({ success: `User has been deleted` });
 
         } catch (error) {
             console.error(error);
