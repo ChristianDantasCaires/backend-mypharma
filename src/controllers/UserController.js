@@ -62,10 +62,10 @@ class UserController {
                 return res.status(404).json({ error: "User does not exists." });
             }
 
-            const encryptedPassword = await createHashPassword(password);
+            const encryptedPassword = await createPasswordHash(password);
 
             await user.updateOne({ name, email, password: encryptedPassword });
-            return res.status(200).json();
+            return res.status(200).json({ success: `User has been changed` });
 
         } catch (error) {
             console.error(error);

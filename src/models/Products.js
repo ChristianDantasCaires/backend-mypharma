@@ -27,6 +27,10 @@ const ProductSchema = new mongoose.Schema(
         marca: {
             type: String,
             required: true
+        },
+        userId: {
+            type: String,
+            required: true
         }
     },
     { timestamps: true }
