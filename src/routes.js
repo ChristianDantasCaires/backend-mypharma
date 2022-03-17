@@ -10,7 +10,7 @@ const routes = new Router();
 routes.post("/sessions", SessionsController.create);
 
 //middleware
-//routes.use(auth);
+routes.use(auth);
 
 
 //rotas usuarios
